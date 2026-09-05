@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Dhruval Hingu | Portfolio</title>
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +22,6 @@
       --text-muted: #9ca3af;
       --accent-blue: #38bdf8;
       --accent-purple: #818cf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
     }
 
     * {
@@ -33,17 +31,21 @@
       scroll-behavior: smooth;
     }
 
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-primary);
       color: var(--text-main);
       line-height: 1.6;
-      overflow-x: hidden;
       position: relative;
       min-height: 100vh;
     }
 
-    /* Ambient Liquid Background Blobs */
+    /* Prevent Liquid Glow Blobs from Causing Horizontal Scroll */
     .liquid-canvas {
       position: fixed;
       top: 0;
@@ -58,184 +60,199 @@
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.55;
-      animation: float 20s infinite ease-in-out alternate;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 18s infinite ease-in-out alternate;
     }
 
     .blob-1 {
-      width: 450px;
-      height: 450px;
+      width: clamp(250px, 40vw, 450px);
+      height: clamp(250px, 40vw, 450px);
       background: radial-gradient(circle, #38bdf8, #2563eb);
-      top: -100px;
-      left: -100px;
+      top: -50px;
+      left: -50px;
     }
 
     .blob-2 {
-      width: 500px;
-      height: 500px;
+      width: clamp(260px, 45vw, 500px);
+      height: clamp(260px, 45vw, 500px);
       background: radial-gradient(circle, #a855f7, #6366f1);
-      bottom: -150px;
-      right: -100px;
-      animation-duration: 25s;
-    }
-
-    .blob-3 {
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, #ec4899, #8b5cf6);
-      top: 40%;
-      left: 60%;
-      animation-duration: 18s;
+      bottom: -80px;
+      right: -80px;
+      animation-duration: 22s;
     }
 
     @keyframes float {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, 60px) scale(1.08); }
-      100% { transform: translate(-30px, 30px) scale(0.95); }
+      50% { transform: translate(30px, 40px) scale(1.05); }
+      100% { transform: translate(-20px, 20px) scale(0.95); }
     }
 
-    /* Reusable Liquid Glass Style */
+    /* Core Liquid Glass Card */
     .liquid-glass {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      border-radius: 20px;
       box-shadow: var(--glass-shadow);
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
     }
 
     .liquid-glass:hover {
-      background: var(--glass-bg-hover);
       border-color: var(--glass-border-hover);
-      box-shadow: 0 12px 40px 0 rgba(56, 189, 248, 0.12);
+      box-shadow: 0 10px 30px 0 rgba(56, 189, 248, 0.12);
     }
 
-    /* Header & Navigation */
+    /* Fully Responsive Navbar */
     header {
       position: sticky;
-      top: 20px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      padding: 0 20px;
+      top: 12px;
+      z-index: 1000;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 16px;
     }
 
-    nav {
+    .nav-container {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
+      justify-content: space-between;
+      padding: 10px 20px;
       border-radius: 40px;
     }
 
-    nav a {
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 500;
-      padding: 8px 14px;
-      border-radius: 20px;
+      padding: 6px 12px;
+      border-radius: 16px;
       transition: all 0.2s ease;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Main Container */
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 6px;
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 50px 40px;
+    /* Main Container */
+    main {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 32px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: clamp(24px, 5vw, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .badge {
-      align-self: flex-start;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 2vw, 0.85rem);
       font-weight: 600;
       color: var(--accent-blue);
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .badge i {
-      font-size: 0.75rem;
+      width: fit-content;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
       background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero .role {
-      font-size: 1.25rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       font-weight: 600;
       color: var(--text-muted);
     }
 
     .hero .bio {
-      font-size: 1.05rem;
+      font-size: clamp(0.92rem, 2.5vw, 1.02rem);
       color: var(--text-muted);
-      max-width: 780px;
+      word-wrap: break-word;
     }
 
-    /* Section Headings */
     section h2 {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 4vw, 1.45rem);
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       color: #ffffff;
     }
 
     section h2 i {
       color: var(--accent-blue);
-      font-size: 1.2rem;
     }
 
     /* Skills Grid */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+      gap: 16px;
+      width: 100%;
     }
 
     .skill-card {
-      padding: 24px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .skill-card h3 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: #f3f4f6;
+      color: #fff;
     }
 
     .pill-group {
@@ -245,33 +262,29 @@
     }
 
     .pill {
-      font-size: 0.82rem;
-      padding: 5px 12px;
-      border-radius: 12px;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
     }
 
-    /* Experience Card */
+    /* Experience */
     .experience-card {
-      padding: 36px;
-    }
-
-    .exp-header {
-      margin-bottom: 20px;
+      padding: clamp(20px, 4vw, 36px);
     }
 
     .exp-header h3 {
-      font-size: 1.25rem;
+      font-size: clamp(1.05rem, 3vw, 1.25rem);
       font-weight: 700;
       color: #fff;
     }
 
     .exp-header .meta {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--accent-blue);
-      margin-top: 4px;
+      margin: 4px 0 16px;
     }
 
     .experience-card ul {
@@ -283,37 +296,39 @@
 
     .experience-card li {
       position: relative;
-      padding-left: 24px;
+      padding-left: 20px;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+      line-height: 1.5;
     }
 
     .experience-card li::before {
       content: "•";
       position: absolute;
-      left: 6px;
+      left: 2px;
       top: -2px;
       color: var(--accent-blue);
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
-    /* Projects Grid */
+    /* Projects */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 16px;
+      width: 100%;
     }
 
     .project-card {
-      padding: 24px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .project-card h3 {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #fff;
     }
@@ -321,106 +336,129 @@
     .project-card span {
       font-size: 0.85rem;
       color: var(--accent-blue);
-      font-weight: 500;
     }
 
-    /* Education Card */
+    /* Education */
     .edu-card {
-      padding: 28px 36px;
+      padding: clamp(18px, 4vw, 28px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
     }
 
     .edu-info h3 {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #fff;
     }
 
     .edu-info p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.88rem;
     }
 
     .grade-badge {
-      padding: 8px 16px;
-      border-radius: 16px;
+      padding: 6px 14px;
+      border-radius: 12px;
       background: rgba(129, 140, 248, 0.1);
       border: 1px solid rgba(129, 140, 248, 0.25);
       color: var(--accent-purple);
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      align-self: flex-start;
     }
 
     /* Contact Links */
     .contact-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+      gap: 12px;
+      width: 100%;
     }
 
     .contact-btn {
-      flex: 1;
-      min-width: 140px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 16px 20px;
+      gap: 8px;
+      padding: 14px 16px;
       text-decoration: none;
       color: #fff;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .contact-btn i {
-      font-size: 1.2rem;
       color: var(--accent-blue);
     }
 
-    /* Footer */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 24px 16px;
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.1rem; }
-      .hero { padding: 30px 24px; }
-      .experience-card { padding: 24px; }
-      nav { gap: 4px; padding: 8px 14px; }
-      nav a { font-size: 0.8rem; padding: 6px 10px; }
+    /* Mobile Specific Layout Constraints */
+    @media (max-width: 680px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(7, 10, 19, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Liquid Canvas Background -->
   <div class="liquid-canvas">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
   </div>
 
-  <!-- Glass Navbar -->
   <header>
-    <nav class="liquid-glass">
-      <a href="#home">Home</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
+    <nav class="liquid-glass nav-container">
+      <a href="#home" class="brand">DH<span>.</span></a>
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#skills" onclick="closeMenu()">Skills</a>
+        <a href="#experience" onclick="closeMenu()">Experience</a>
+        <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#education" onclick="closeMenu()">Education</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+      </div>
     </nav>
   </header>
 
   <main>
-    <!-- Hero / Introduction -->
     <section id="home">
       <div class="liquid-glass hero">
         <div class="badge">
@@ -429,12 +467,11 @@
         <h1>Dhruval Hingu</h1>
         <p class="role">Assistant System Engineer</p>
         <p class="bio">
-          Supporting SFMS payment gateways (NEFT &amp; RTGS), CCIL trading platforms, and RBI E-Kuber systems for major institutions like BNP Paribas and NABARD. Specialized in production support, high-availability monitoring, critical deployments, and regulatory coordination.
+          Supporting SFMS payment gateways (NEFT &amp; RTGS), CCIL trading platforms, and RBI E-Kuber systems for BNP Paribas and NABARD. Focused on production support, high-availability monitoring, deployments, and regulatory compliance.
         </p>
       </div>
     </section>
 
-    <!-- Technical Skills -->
     <section id="skills">
       <h2><i class="fa-solid fa-code"></i> Technical Skills</h2>
       <div class="skills-grid">
@@ -470,40 +507,37 @@
         </div>
 
         <div class="liquid-glass skill-card">
-          <h3>Ops &amp; Infrastructure</h3>
+          <h3>Ops &amp; Support</h3>
           <div class="pill-group">
             <span class="pill">App Deployment</span>
-            <span class="pill">Incident Management</span>
-            <span class="pill">System Upgrades</span>
-            <span class="pill">Compliance</span>
+            <span class="pill">Incident Mgmt</span>
+            <span class="pill">Upgrades</span>
+            <span class="pill">Audit Prep</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience -->
     <section id="experience">
       <h2><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
       <div class="liquid-glass experience-card">
         <div class="exp-header">
-          <h3>Assistant System Engineer · Tata Consultancy Services</h3>
-          <div class="meta">Clients: BNP Paribas Bank &amp; NABARD | March 2024 – Present</div>
+          <h3>Assistant System Engineer · TCS</h3>
+          <div class="meta">Clients: BNP Paribas Bank &amp; NABARD | Mar 2024 – Present</div>
         </div>
         <ul>
-          <li>Provide 24/7 production support for SFMS applications managing NEFT and RTGS mission-critical payment systems.</li>
-          <li>Support CCIL (Clearing Corporation of India Limited) trading applications used for financial market transactions.</li>
-          <li>Oversee E-Kuber platform operations for core banking and government transaction processing.</li>
-          <li>Execute application deployments and version upgrades across production environments for SFMS, CCIL, and E-Kuber.</li>
-          <li>Deliver end-to-end production support for financial trading systems utilized by banking users and dealers at NABARD.</li>
-          <li>Monitor server health, remediate production incidents, and maintain high availability SLAs for core banking infrastructure.</li>
-          <li>Coordinate with RBI, CCIL authorities, and internal developer teams for technical and regulatory enhancements.</li>
-          <li>Perform server setup, configuration, and middleware/database application integrations.</li>
-          <li>Maintain technical runbooks, deployment checklists, and incident post-mortems for compliance and audits.</li>
+          <li>Provide 24/7 production support for SFMS applications managing NEFT and RTGS payment gateways.</li>
+          <li>Support CCIL trading applications utilized in financial market transactions.</li>
+          <li>Oversee E-Kuber core banking operations and government transactions.</li>
+          <li>Perform application rollouts, version upgrades, and deployment verifications.</li>
+          <li>Deliver continuous support to institutional banking users and trading dealers at NABARD.</li>
+          <li>Monitor server health metrics and remediate incidents to preserve high-availability SLAs.</li>
+          <li>Collaborate directly with RBI, CCIL, and internal development teams for regulatory upgrades.</li>
+          <li>Conduct server setups, middleware integrations, and database maintenance tasks.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <h2><i class="fa-solid fa-layer-group"></i> Projects</h2>
       <div class="projects-grid">
@@ -522,7 +556,6 @@
       </div>
     </section>
 
-    <!-- Education -->
     <section id="education">
       <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
       <div class="liquid-glass edu-card">
@@ -534,7 +567,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
       <h2><i class="fa-solid fa-paper-plane"></i> Connect</h2>
       <div class="contact-container">
@@ -552,8 +584,20 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Dhruval Hingu.</p>
+    <p>&copy; 2026 Dhruval Hingu. Designed with Liquid Glass.</p>
   </footer>
 
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    function closeMenu() {
+      navLinks.classList.remove('active');
+    }
+  </script>
 </body>
 </html>
